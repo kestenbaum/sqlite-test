@@ -2,7 +2,10 @@ import express from "express";
 import nunjucks from "nunjucks";
 import path from "path";
 import routes from "./router";
+import * as dotenv from 'dotenv';
+dotenv.config();
 
+const PORT = Number(process.env.PORT) || 3001
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
@@ -16,7 +19,7 @@ nunjucks.configure(viewsPath, {
 
 app.use("/", routes);
 
-const PORT = 3000;
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });

@@ -1,11 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    test
-</body>
-</html>
+{% extends "layout.njk" %}
+
+{% block content %}
+  <h2>Posts</h2>
+
+  {% if posts.length %}
+    <ul>
+      {% for post in posts %}
+        <li>
+          <strong>{{ post.title }}</strong><br />
+          <small>{{ post.created_at }}</small><br />
+          <div>{{ post.content }}</div>
+             <form action="/delete/{{ post.id }}" method="POST" style="margin-top: 5px;">
+              <button type="submit">Delete</button>
+            </form>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No posts yet.</p>
+  {% endif %}
+{% endblock %}

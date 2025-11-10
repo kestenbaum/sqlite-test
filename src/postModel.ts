@@ -12,6 +12,11 @@ export function getAllPosts (): Post[] {
     return stmt.all() as Post[]
 }
 
+export function deletePostById (id: string) {
+   const stmt = db.prepare("DELETE FROM posts WHERE id = ?")
+   stmt.run(id)
+}
+
 export function createPost (title: string, content: string): void {
     const stmt = db.prepare("INSERT INTO posts (title, content) VALUES (?, ?)")
     stmt.run(title, content)

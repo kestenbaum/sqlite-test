@@ -1,21 +1,22 @@
-import { Request, Response } from "express";
 import express from "express";
 import nunjucks from "nunjucks";
 import path from "path";
+import routes from "./router";
 
 const app = express();
 
-nunjucks.configure(path.join(__dirname, "view"), {
+app.use(express.urlencoded({ extended: true }));
+
+const viewsPath = path.join(__dirname, "view");
+
+nunjucks.configure(viewsPath, {
   autoescape: true,
   express: app,
 });
 
-app.get("/", (req: Request, res: Response) => {
-    res.render("index.njk")
-})
-
+app.use("/", routes);
 
 const PORT = 3000;
 app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });

@@ -2,7 +2,7 @@
 {% block content %}
 <h2 class="text-2xl font-semibold mb-4">Create Post</h2>
 
-<form action="/new" method="POST" class="bg-white shadow p-6 rounded-lg space-y-4">
+<form action="/update/{{ post.id }}" method="POST" class="bg-white shadow p-6 rounded-lg space-y-4">
   <div>
     <label class="block text-gray-600 mb-1">Title:</label>
     <input type="text" name="title" required value={{ post.title }}

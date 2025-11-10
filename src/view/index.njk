@@ -1,23 +1,26 @@
 {% extends "layout.njk" %}
-
 {% block content %}
-  <h2>Posts</h2>
+<h2 class="text-2xl font-semibold mb-4">Posts</h2>
 
-  {% if posts.length %}
-    <ul>
-      {% for post in posts %}
-        <li>
-          <strong>{{ post.title }}</strong><br />
-          <small>{{ post.created_at }}</small><br />
-          <div>{{ post.content }}</div>
-             <form action="/delete/{{ post.id }}" method="POST" style="margin-top: 5px;">
-              <button type="submit">Delete</button>
-            </form>
-            <a href="/update/{{ post.id }}">Update</a>
-        </li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>No posts yet.</p>
-  {% endif %}
+{% if posts.length %}
+  <ul class="space-y-4">
+    {% for post in posts %}
+      <li class="bg-white shadow p-4 rounded-lg border border-gray-200">
+        <div class="flex justify-between items-center">
+          <h3 class="text-xl font-bold text-blue-700">{{ post.title }}</h3>
+          <span class="text-gray-400 text-sm">{{ post.created_at }}</span>
+        </div>
+        <p class="mt-2 text-gray-700">{{ post.content }}</p>
+        <div class="flex gap-3 mt-4">
+          <a href="/update/{{ post.id }}" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded">Update</a>
+          <form method="POST" action="/delete/{{ post.id }}">
+            <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">Delete</button>
+          </form>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p class="text-gray-500 italic">No posts yet.</p>
+{% endif %}
 {% endblock %}

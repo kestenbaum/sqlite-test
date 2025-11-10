@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>My Blog</title>
-  </head>
-  <body>
-    <header>
-      <h1>My Blog</h1>
-      <nav>
-        <a href="/">Home</a> |
-        <a href="/new">New Post</a>
+<head>
+  <meta charset="UTF-8">
+  <title>My Blog</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+  <header class="bg-white shadow-sm">
+    <div class="max-w-4xl mx-auto flex justify-between items-center p-4">
+      <h1 class="text-3xl font-bold text-blue-700">My Blog</h1>
+      <nav class="space-x-4">
+        <a href="/" class="text-blue-600 hover:underline">Home</a>
+        <a href="/new" class="text-blue-600 hover:underline">New Post</a>
       </nav>
-      <hr />
-    </header>
-
-    <main>
-      {% block content %}{% endblock %}
-    </main>
-  </body>
+    </div>
+  </header>
+  <main class="max-w-3xl mx-auto p-6">
+    {% block content %}{% endblock %}
+  </main>
+</body>
 </html>

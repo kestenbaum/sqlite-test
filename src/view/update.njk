@@ -1,15 +1,20 @@
 {% extends "layout.njk" %}
-
 {% block content %}
-<h2>Edit Post</h2>
+<h2 class="text-2xl font-semibold mb-4">Create Post</h2>
 
-<form action="/update/{{ post.id }}" method="POST">
-  <label>Title:</label>
-  <input type="text" name="title" value="{{ post.title }}" required />
+<form action="/new" method="POST" class="bg-white shadow p-6 rounded-lg space-y-4">
+  <div>
+    <label class="block text-gray-600 mb-1">Title:</label>
+    <input type="text" name="title" required value={{ post.title }}
+      class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+  </div>
 
-  <label>Content:</label>
-  <textarea name="content" required>{{ post.content }}</textarea>
+  <div>
+    <label class="block text-gray-600 mb-1">Content:</label>
+    <textarea name="content" required
+      class="w-full border border-gray-300 rounded px-3 py-2 h-32 focus:outline-none focus:ring-2 focus:ring-blue-400">{{ post.content }}</textarea>
+  </div>
 
-  <button type="submit">Update</button>
+  <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save</button>
 </form>
 {% endblock %}

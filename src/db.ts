@@ -7,7 +7,7 @@ db.prepare(`
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
     content TEXT NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    created_at DATETIME DEFAULT (datetime('now','localtime'))
   )
 `).run();
 

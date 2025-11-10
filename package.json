@@ -1,0 +1,35 @@
+{
+  "name": "sqlite-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  "build": "tsc",
+  "start": "node dist/app.js",
+  "dev": "nodemon --watch src --exec ts-node src/app.ts"
+},  
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kestenbaum/sqlite-test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/kestenbaum/sqlite-test/issues"
+  },
+  "homepage": "https://github.com/kestenbaum/sqlite-test#readme",
+  "dependencies": {
+    "better-sqlite3": "^12.4.1",
+    "express": "^5.1.0",
+    "nunjucks": "^3.2.4"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.5",
+    "@types/nunjucks": "^3.2.6",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createPost, deletePostById, getAllPosts } from "./postModel";
+import { createPost, deletePostById, getAllPosts, getPostById, updatePostById } from "./postModel";
 
 export function listPosts (req: Request, res: Response) {
     const posts = getAllPosts()
@@ -12,12 +12,26 @@ export function showNewPostForm (req: Request, res: Response) {
 
 export function handleDeletePost (req: Request, res:Response) {
     const { id } = req.params
-    deletePostById(id)
+    deletePostById(Number(id))
     res.redirect("/")
 }
 
 export function handleCreatePost (req: Request, res: Response) {
-    const { title,  content }= req.body as { title: string, content: string }
+    const { title, content }= req.body as { title: string, content: string }
     createPost(title, content);
     res.redirect("/")
+}
+
+export function handleGetPostById (req: Request, res: Response) {
+    const { id } = req.params;
+    const post = getPostById(Number(id));
+    res.render("update.njk", { post });
+}
+
+export function handleUpdateById (req: Request, res: Response) {
+    const { id } = req.params
+    const { title, content } = req.body
+
+   updatePostById(Number(id) , title , content)
+   res.redirect("/")
 }

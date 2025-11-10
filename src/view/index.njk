@@ -13,6 +13,7 @@
              <form action="/delete/{{ post.id }}" method="POST" style="margin-top: 5px;">
               <button type="submit">Delete</button>
             </form>
+            <a href="/update/{{ post.id }}">Update</a>
         </li>
       {% endfor %}
     </ul>

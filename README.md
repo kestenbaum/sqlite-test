@@ -33,11 +33,3 @@ Server läuft standardmäßig auf:
  http://localhost:3000
 ```
 
-Datenbank
-Beim ersten Start wird automatisch eine Datei blog.db erstellt.
-Sie enthält eine Tabelle posts mit den Spalten:
-*id – Primärschlüssel
-*title – Titel des Blogposts
-*content – Inhalt
-*created_at – Erstellungsdatum (lokale Zeit)
-

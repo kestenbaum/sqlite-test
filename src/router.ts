@@ -8,7 +8,9 @@ import {
   handleGetPostById,
 } from "./controllers/postController";
 import { showLoginForm, loginUser, logoutUser, registerUser, showRegisterForm } from "./controllers/authController";
+import { profileController, checkedSessionUser } from "./controllers/profileController";
 import { requireAuth } from "./middleware/authMiddleware";
+
 
 const router = Router();
 
@@ -30,5 +32,7 @@ router.post("/login", loginUser);
 
 router.get("/logout", requireAuth, logoutUser);
 
+router.get("/profile", requireAuth, checkedSessionUser);
+router.get("/profile/:id", requireAuth, profileController);
 
 export default router;

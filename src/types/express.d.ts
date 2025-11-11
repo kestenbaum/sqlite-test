@@ -8,6 +8,5 @@ declare module 'express-session' {
 
 export interface CustomSessionUser {
     id: number;
-    login: string;
-    is_admin: boolean;
+    name: string;
 }

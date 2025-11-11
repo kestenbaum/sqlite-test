@@ -24,6 +24,7 @@
     "@types/bcrypt": "^6.0.0",
     "bcrypt": "^6.0.0",
     "better-sqlite3": "^12.4.1",
+    "connect-sqlite3": "^0.9.16",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "express-session": "^1.18.2",

@@ -13,10 +13,22 @@ export function showRegisterForm (req: Request, res: Response) {
     res.render("register.njk")
 }
 
-export function registerUser (req: Request, res: Response) {
-    const { name, email, password } = req.body
-    createUserModel(name, email, password)
-    res.redirect("/")
+export function registerUser(req: Request, res: Response) {
+  const { name, email, password } = req.body;
+  const user = createUserModel(name, email, password);
+
+  req.session.user = {
+    id: user.id,
+    name: user.name,
+  };
+
+  req.session.save(err => {
+    if (err) {
+      console.error("Session save error:", err);
+      return res.status(500).send("Server error");
+    }
+    res.redirect(`/profile/${user.id}`);
+  });
 }
 
 export function showLoginForm (req: Request, res: Response) {
@@ -33,15 +45,17 @@ export function loginUser (req: AuthenticatedRequest, res: Response) {
 
   req.session.user = {
     id: user.id,
-    login: user.name,
-    is_admin: user.is_admin,
+    name: user.name,
   };
 
-  console.log(req.session.user)
-
-  res.redirect("/");
+  req.session.save(() => {
+    res.redirect(`/profile/${user.id}`);
+  });
 }
 
-export function logoutUser (req: Request, res: Response) {
-    req.session.destroy(() => res.redirect("/"))
+export function logoutUser(req: Request, res: Response) {
+  req.session.destroy(() => {
+    res.clearCookie("connect.sid"); 
+    res.redirect("/login");
+  });
 }

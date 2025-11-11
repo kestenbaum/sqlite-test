@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createPost, deletePostById, getAllPosts, getPostById, updatePostById } from "./postModel";
+import { createPost, deletePostById, getAllPosts, getPostById, updatePostById } from "../models/postModel";
 
 export function listPosts (req: Request, res: Response) {
     const posts = getAllPosts()
@@ -17,8 +17,14 @@ export function handleDeletePost (req: Request, res:Response) {
 }
 
 export function handleCreatePost (req: Request, res: Response) {
-    const { title, content }= req.body as { title: string, content: string }
-    createPost(title, content);
+    const { title, content } = req.body as { title: string, content: string }
+    const userId = req.session.user?.id
+
+    if (!userId) {
+         return res.redirect("/login");
+    }
+
+    createPost(title, content, userId);
     res.redirect("/")
 }
 

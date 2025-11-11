@@ -6,16 +6,29 @@ import {
   handleDeletePost,
   handleUpdateById,
   handleGetPostById,
-} from "./postController";
+} from "./controllers/postController";
+import { showLoginForm, loginUser, logoutUser, registerUser, showRegisterForm } from "./controllers/authController";
+import { requireAuth } from "./middleware/authMiddleware";
 
 const router = Router();
 
 router.get("/", listPosts);
-router.get("/new", showNewPostForm);
-router.post("/new", handleCreatePost);
-router.post("/delete/:id", handleDeletePost);
-router.get("/update/:id", handleGetPostById);
-router.post("/update/:id", handleUpdateById);
+
+router.get("/new", requireAuth, showNewPostForm);
+router.post("/new",requireAuth,  handleCreatePost);
+
+router.post("/delete/:id", requireAuth, handleDeletePost);
+
+router.get("/update/:id", requireAuth, handleGetPostById);
+router.post("/update/:id", requireAuth, handleUpdateById);
+
+router.get("/register", showRegisterForm);
+router.post("/register", registerUser);
+
+router.get("/login", showLoginForm);
+router.post("/login", loginUser);
+
+router.get("/logout", requireAuth, logoutUser);
 
 
 export default router;

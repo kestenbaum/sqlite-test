@@ -1,4 +1,4 @@
-import db from "./db";
+import db from "../db";
 
 interface Post {
     id: number;
@@ -8,8 +8,18 @@ interface Post {
 }
 
 export function getAllPosts (): Post[] {
-    const stmt = db.prepare("SELECT * FROM posts ORDER BY created_at DESC")
-    return stmt.all() as Post[]
+    const stmt = db.prepare(`
+    SELECT 
+      posts.id,
+      posts.title,
+      posts.content,
+      posts.created_at,
+      users.name AS author
+    FROM posts
+    JOIN users ON posts.user_id = users.id
+    ORDER BY posts.created_at DESC
+  `);
+  return stmt.all() as Post[];
 }
 
 export function deletePostById (id: number) {
@@ -17,9 +27,9 @@ export function deletePostById (id: number) {
    stmt.run(id)
 }
 
-export function createPost (title: string, content: string) {
-    const stmt = db.prepare("INSERT INTO posts (title, content) VALUES (?, ?)")
-    stmt.run(title, content)
+export function createPost (title: string, content: string, userId: number) {
+    const stmt = db.prepare("INSERT INTO posts (title, content, user_id) VALUES (?, ?, ?)")
+    stmt.run(title, content, userId)
 }
 
 export function updatePostById (id: number, title: string, content: string ) {
